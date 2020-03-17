@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export default class Search {
-  
   async getResults() {
     try {
       const resRep = await axios(
@@ -13,7 +12,9 @@ export default class Search {
       this.result = resRep.data;
       this.resultCust = resCust.data;
 
-      this.assignmentofRepresentative();
+      let results = this.assignmentofRepresentative();
+      console.log(results);
+      return results;
     } catch (Error) {
       alert(Error);
     }
@@ -30,7 +31,7 @@ export default class Search {
 
     return customerObjects;
   }
-  
+
   RefineRepresentatives() {
     let representatives = this.result;
     let customers = this.resultCust;
@@ -90,7 +91,7 @@ export default class Search {
     const assignedRepsMap = new Map();
     let customers = this.resultCust;
     let result = [];
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < sortedReps.length; i++) {
       let repsArray = sortedReps[i].representative;
       result[i] = new Opportunities();
       let companyObj = {

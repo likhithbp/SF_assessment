@@ -1,47 +1,113 @@
 import "babel-polyfill";
-import Search from "../Search";
-// describe("Search", () => {
-//     it("should...", () => {
-//       const anjaliFn = Search.prototype.anjali = jest.fn();
-//       const person = new Search();
-//       const expected = 6;
-  
-//       person.anjali();
-  
-//       expect(anjaliFn).toHaveBeenCalledTimes(1);
-//       expect(person.anjali()).toBe(expected);
-//     });
-//   });
+import Search from "../Search.js";
 
-beforeAll(() => {
-    //jest.spyOn(Search.prototype, 'anjali').mockImplementation(() => 'Hello');
+test("getResults() should be called at the beginning", () => {
+  let search = new Search();
+  const getResultsFn = (Search.prototype.getResults = jest.fn());
+  search.getResults();
+  expect(getResultsFn).toHaveBeenCalledTimes(1);
 });
 
-afterAll(() => {
-    jest.restoreAllMocks();
+describe("getResults()", () => {
+  test("should call assignmentofRepresentative()", () => {
+    let mockFunctions = jest.fn();
+    Search.prototype.getResults = mockFunctions;
+    Search.prototype.assignmentofRepresentative = mockFunctions;
+    const search = new Search();
+    search.getResults();
+    expect(mockFunctions).toHaveBeenCalledTimes(1);
+  });
 });
 
-test('Modify class', () => {
-    let search = new Search();
-    const anjaliFn = Search.prototype.assignmentofRepresentative = jest.fn();
+describe("assignmentofRepresentative()", () => {
+  test("should call sortingofRepresentative()", () => {
+    let mockFunctions = jest.fn();
+    Search.prototype.sortingofRepresentative = mockFunctions;
+    Search.prototype.assignmentofRepresentative = mockFunctions;
+    const search = new Search();
     search.assignmentofRepresentative();
-    expect(anjaliFn).toHaveBeenCalledTimes(1);
-  
+    expect(mockFunctions).toHaveBeenCalledTimes(1);
+  });
 });
 
-test('Test Haversine', () => {
-    let search = new Search();
-    const anjaliFn = Search.prototype.assignmentofRepresentative = jest.fn();
+describe("sortingofRepresentative()", () => {
+  test("should call RefineRepresentatives()", () => {
+    let mockFunctions = jest.fn();
+    Search.prototype.sortingofRepresentative = mockFunctions;
+    Search.prototype.RefineRepresentatives = mockFunctions;
+    const search = new Search();
+    search.sortingofRepresentative();
+    expect(mockFunctions).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("RefineRepresentatives()", () => {
+  test("should call haversine()", () => {
+    let mockFunctions = jest.fn();
+    Search.prototype.haversine = mockFunctions;
+    Search.prototype.RefineRepresentatives = mockFunctions;
+    const search = new Search();
+    search.RefineRepresentatives();
+    expect(mockFunctions).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("haversine()", () => {
+  test("should call haversine()", () => {
+    let mockFunctions = jest.fn();
+    Search.prototype.haversine = mockFunctions;
+    const search = new Search();
     search.haversine();
-    expect(anjaliFn).not.toBeNaN();
-  
+    expect(mockFunctions).not.toBeUndefined();
+  });
 });
 
+describe("haversine()", () => {
+  test("should return a number", () => {
+    const haversinemock = jest.fn();
+    Search.prototype.haversine = haversinemock;
+    const search = new Search();
+    search.haversine();
+    expect(haversinemock).toHaveReturned();
+  });
+});
 
+describe("getResults()", () => {
+  test("should return an array of objects", () => {
+    const getResultsmock = jest.fn();
+    Search.prototype.getResults = getResultsmock;
+    const search = new Search();
+    search.getResults();
+    expect(getResultsmock).toHaveReturned();
+  });
+});
 
-// test('Modify class', () => {
-//     let search = new Search();
-//     //const anjaliFn = Search.prototype.anjali = jest.fn();
-    
-//    expect(search.anjali()).toBe(6);
-// });
+describe("sortingofRepresentative()", () => {
+  test("should return an array of objects", () => {
+    const sortingofRepresentativemock = jest.fn();
+    Search.prototype.sortingofRepresentative = sortingofRepresentativemock;
+    const search = new Search();
+    search.sortingofRepresentative();
+    expect(sortingofRepresentativemock).toHaveReturned();
+  });
+});
+
+describe("RefineRepresentatives()", () => {
+  test("should return an array of objects", () => {
+    const RefineRepresentativesmock = jest.fn();
+    Search.prototype.RefineRepresentatives = RefineRepresentativesmock;
+    const search = new Search();
+    search.RefineRepresentatives();
+    expect(RefineRepresentativesmock).toHaveReturned();
+  });
+});
+
+describe("assignmentofRepresentative", () => {
+  test("should return an array of objects", () => {
+    const assignmentofRepresentativemock = jest.fn();
+    Search.prototype.assignmentofRepresentative = assignmentofRepresentativemock;
+    const search = new Search();
+    search.assignmentofRepresentative();
+    expect(assignmentofRepresentativemock).toHaveReturned();
+  });
+});
